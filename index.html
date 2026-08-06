@@ -454,6 +454,41 @@ footer a:hover{color:#fff !important}
   .champion-block .jp{font-size:13px}
 }
 
+
+/* ===== Ver.7 CV / mobile optimization ===== */
+.machine-toggle{width:100%;min-height:46px;margin-top:10px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);color:#eef3fb;border-radius:10px;font:inherit;font-size:11px;font-weight:900;cursor:pointer;letter-spacing:.04em}
+.machine-grid .machine-card:nth-child(n+5){display:none}
+.machine-category.show-all .machine-grid .machine-card{display:block}
+.machine-category.show-all .machine-toggle{border-color:rgba(124,164,255,.42);background:rgba(47,111,255,.09)}
+.pt-conversion{margin:0 68px 20px;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid rgba(124,164,255,.28);border-radius:16px;background:linear-gradient(120deg,rgba(47,111,255,.12),rgba(255,255,255,.02))}
+.pt-conversion small{display:block;color:var(--blue2);font-size:9px;font-weight:900;letter-spacing:.16em;margin-bottom:7px}
+.pt-conversion strong{display:block;font-size:18px;line-height:1.45;margin-bottom:5px}
+.pt-conversion p{margin:0;color:var(--sub);font-size:11.5px;line-height:1.7}
+.pt-conversion .btn{white-space:nowrap;flex:none}
+@media(max-width:900px){.pt-conversion{margin:0 36px 20px}}
+@media(max-width:680px){
+  body{padding-bottom:64px}.section{padding:68px 0}.wrap{width:min(calc(100% - 24px),var(--max))}
+  h2{font-size:clamp(34px,11vw,48px);line-height:1.08}.lead{font-size:13px;line-height:1.82}.kicker{font-size:9px;letter-spacing:.18em}
+  .hero{min-height:80svh;background-position:58% center}.hero-inner{padding:104px 0 92px}h1{font-size:clamp(50px,17vw,74px);line-height:.84}
+  .hero-jp{font-size:20px;line-height:1.45;margin-top:23px}.hero-sub{font-size:12.5px;line-height:1.75;max-width:88%}
+  .facts{grid-template-columns:repeat(2,1fr)}.fact{padding:15px 12px;min-height:68px}.fact strong{font-size:12px;line-height:1.45}.fact small{font-size:8px;margin-bottom:3px}
+  .intro{gap:22px}.intro-title{font-size:28px;line-height:1.45}.intro p{font-size:13px;line-height:1.85}
+  .features{gap:12px}.feature{border-radius:14px}.feature-photo{min-height:230px}.feature-copy{padding:24px 20px}.feature-copy h3{font-size:22px}.feature-copy p{font-size:12.5px;line-height:1.75}
+  .photo-mosaic{gap:8px}.photo-mosaic figure{border-radius:14px}.gallery-desc{padding:14px 13px}.gallery-desc strong{font-size:13px}.gallery-desc p{font-size:11.5px;line-height:1.65}
+  .machine-category{margin-top:30px;padding-top:22px}.machine-category-title{align-items:flex-start;flex-direction:column;gap:4px}.machine-category-title h4{font-size:20px}
+  .machine-grid{grid-template-columns:1fr 1fr;gap:9px}.machine-card{border-radius:12px}.machine-card .visual{height:145px}.machine-card .body{padding:12px}.machine-card .body small{font-size:7.5px}.machine-card .body strong{font-size:12px;line-height:1.35}.machine-toggle{font-size:10.5px}
+  .beginner-box{padding:27px 21px}.beginner-photo{min-height:330px}.check{font-size:12.5px;line-height:1.6}
+  .pt-intro{padding:34px 20px 26px}.pt-proof{padding:20px}.pt-proof strong{font-size:25px}.trainer{padding:0 20px 28px}.trainer-showcase{gap:12px}
+  .trainer-card-premium,.champion-block{padding:22px 19px}.trainer-name-premium{font-size:37px}.trainer-message{font-size:13px;line-height:1.8}.champion-block .big{font-size:35px}.champion-block .jp{font-size:12.5px;line-height:1.55}
+  .result-premium{padding:14px 15px}.result-premium .event,.result-premium .rank{font-size:11px}.secondary-copy{padding:24px 20px}.secondary-copy h3{font-size:26px}.secondary-copy p{font-size:12.5px}
+  .pt-conversion{margin:0 20px 16px;padding:20px;display:block}.pt-conversion strong{font-size:16px}.pt-conversion .btn{width:100%;margin-top:16px;min-height:50px}
+  .ptprices{padding:0 20px 30px}.ptprice{padding:20px}.ptprice strong{font-size:21px}
+  .plans{gap:10px}.plan{padding:23px 20px}.plan h3{font-size:19px}.price{font-size:31px}.fees{margin-top:10px}.fee{padding:16px}.step{padding:24px 18px}
+  .access-card{padding:26px 20px}.access-photo{min-height:330px}
+  .final{padding:76px 0 90px}.final p{font-size:12.5px;line-height:1.75}.final-actions{display:none}
+  .mobile-cta{min-height:64px;box-shadow:0 -8px 28px rgba(0,0,0,.35)}.mobile-cta a{font-size:12px}
+}
+
 </style>
 </head>
 <body>
@@ -547,6 +582,7 @@ footer a:hover{color:#fff !important}
           <div class="visual"><img src="https://himitsu-kichi24.com/assets/images/weight10.png" alt="ペックフライ/リアデルト"></div>
           <div class="body"><small>WEIGHT STACK</small><strong>ペックフライ/リアデルト</strong></div>
         </article></div>
+<button class="machine-toggle" type="button" aria-expanded="false">すべてのマシンを見る ＋</button>
 </div>
 
 <div class="machine-category">
@@ -671,7 +707,17 @@ footer a:hover{color:#fff !important}
     </div>
   </div>
 
-  <div class="ptprices">
+  
+<div class="pt-conversion">
+  <div>
+    <small>PERSONAL TRAINING</small>
+    <strong>まずは、今の悩みを相談してください。</strong>
+    <p>トレーニング経験や目的に合わせて、無理のない進め方をご提案します。</p>
+  </div>
+  <a class="btn btn-primary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学・相談 →</a>
+</div>
+
+<div class="ptprices">
     <div class="ptprice"><small>30 MIN</small><strong>単発 ¥4,400</strong><p>月4回 ¥13,200</p></div>
     <div class="ptprice"><small>60 MIN</small><strong>単発 ¥7,700</strong><p>月4回 ¥26,400</p></div>
   </div>
@@ -703,6 +749,18 @@ document.querySelectorAll('img').forEach(function(img){
     box.textContent='画像を読み込めませんでした';
     img.parentElement.appendChild(box);
   }, {once:false});
+});
+</script>
+
+
+<script>
+document.querySelectorAll('.machine-toggle').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var category = btn.closest('.machine-category');
+    var expanded = category.classList.toggle('show-all');
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    btn.textContent = expanded ? '代表マシンだけ表示 －' : 'すべてのマシンを見る ＋';
+  });
 });
 </script>
 
