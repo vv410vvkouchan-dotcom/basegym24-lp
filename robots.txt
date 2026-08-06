@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vv410vvkouchan-dotcom.github.io/basegym24-lp/sitemap.xml
