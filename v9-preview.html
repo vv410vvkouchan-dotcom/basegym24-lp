@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BASE GYM24 V9 Preview</title>
+<style>
+html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.loading strong{display:block;font-size:22px;margin-bottom:8px}.loading span{color:#aeb7c5;font-size:13px}.error{color:#ffb4b4}
+</style>
+</head>
+<body>
+<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>プレビューを読み込んでいます…</span></div></div>
+<script>
+(async()=>{
+  try{
+    const [v8Text,v7Text]=await Promise.all([
+      fetch('./v8-preview.html?rev=9',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V8');return r.text()}),
+      fetch('./index.html?rev=9',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V7');return r.text()})
+    ]);
+    const parser=new DOMParser();
+    const v8=parser.parseFromString(v8Text,'text/html');
+    const v7=parser.parseFromString(v7Text,'text/html');
+    const current=v8.querySelector('#personal');
+    const previous=v7.querySelector('#personal');
+    if(!current||!previous)throw new Error('PERSONAL');
+    current.replaceWith(previous.cloneNode(true));
+
+    const style=v8.createElement('style');
+    style.textContent=`
+/* V7 PERSONAL TRAINING SECTION — intentionally preserved */
+#personal .personal{border:1px solid var(--line);border-radius:28px;padding:0;overflow:hidden;background:linear-gradient(145deg,#111722 0%,#090c11 48%,#07090d 100%);box-shadow:0 24px 70px rgba(0,0,0,.18)}
+#personal .pt-intro{padding:74px 68px 60px;display:grid;grid-template-columns:1fr .84fr;gap:52px;align-items:end}
+#personal .pt-badge{display:inline-flex;gap:9px;align-items:center;padding:9px 12px;border:1px solid rgba(124,164,255,.32);background:rgba(47,111,255,.08);border-radius:999px;color:#dfe8ff;font-size:10px;font-weight:900;letter-spacing:.12em;margin-bottom:18px}
+#personal .pt-proof{padding:24px 28px;border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:16px}
+#personal .pt-proof strong{display:block;font-size:clamp(24px,3vw,38px);line-height:1.08;margin-bottom:10px}
+#personal .pt-proof p{margin:0;color:var(--sub);font-size:12px;line-height:1.75}
+#personal .trainer{display:block;margin:0;padding:0 68px 68px;border-top:0}
+#personal .trainer-showcase{display:grid;grid-template-columns:1.08fr .92fr;gap:18px;min-height:720px}
+#personal .trainer-hero-photo{min-height:720px;border-radius:22px;overflow:hidden;position:relative;background:#090b0f}
+#personal .trainer-hero-photo img{width:100%;height:100%;object-fit:contain!important;object-position:center center!important;background:#090b0f}
+#personal .trainer-hero-photo:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);border-radius:22px;pointer-events:none}
+#personal .trainer-copy-stack{display:grid;grid-template-rows:auto 1fr auto;gap:18px}
+#personal .trainer-card-premium{padding:34px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.027)}
+#personal .trainer-label{color:var(--blue2);font-size:10px;font-weight:900;letter-spacing:.18em;margin-bottom:8px}
+#personal .trainer-name-premium{font-size:clamp(34px,4vw,54px);line-height:1;font-weight:950;margin:0 0 14px}
+#personal .trainer-position{font-size:12px;color:#d8dee8;margin-bottom:22px}
+#personal .trainer-message{font-size:16px;line-height:1.95;color:#d5dae3;margin:0}
+#personal .champion-block{position:relative;overflow:hidden;padding:34px;border-radius:22px;border:1px solid rgba(124,164,255,.27);background:radial-gradient(circle at 90% 10%,rgba(47,111,255,.22),transparent 18rem),linear-gradient(145deg,#101827,#0b1018)}
+#personal .champion-block small{display:block;font-size:10px;font-weight:900;letter-spacing:.18em;color:#bcd0ff;margin-bottom:12px}
+#personal .champion-block .big{display:block;font-size:clamp(30px,4.4vw,58px);line-height:1.03;font-weight:1000;letter-spacing:-.035em}
+#personal .champion-block .jp{display:block;margin-top:15px;font-size:15px;font-weight:800}
+#personal .results-premium{display:grid;gap:0;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+#personal .result-premium{display:grid;grid-template-columns:72px 1fr auto;gap:16px;align-items:center;padding:18px 20px;background:rgba(255,255,255,.018);border-bottom:1px solid var(--line)}
+#personal .result-premium:last-child{border-bottom:0}
+#personal .result-premium .year{color:var(--blue2);font-weight:950;font-size:13px}
+#personal .result-premium .event{font-size:12px;line-height:1.5;color:#dce2eb;font-weight:750}
+#personal .result-premium .rank{font-size:12px;font-weight:950;color:#fff;white-space:nowrap}
+#personal .secondary-photo{margin-top:18px;display:grid;grid-template-columns:.84fr 1.16fr;gap:18px}
+#personal .secondary-photo-visual{min-height:410px;border-radius:22px;overflow:hidden;background:#090b0f;border:1px solid var(--line)}
+#personal .secondary-photo-visual img{width:100%;height:100%;object-fit:contain!important;object-position:center center!important;background:#090b0f}
+#personal .secondary-copy{display:flex;flex-direction:column;justify-content:center;padding:42px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.022)}
+#personal .secondary-copy h3{font-size:clamp(28px,3.3vw,43px);line-height:1.15;margin-bottom:18px}
+#personal .secondary-copy p{color:var(--sub);font-size:14px;line-height:1.9;margin:0}
+#personal .ptprices{display:grid;grid-template-columns:1fr 1fr;margin:0;padding:0 68px 68px;gap:16px}
+#personal .ptprice{padding:28px 30px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}
+#personal .ptprice small{font-size:10px;color:var(--muted)}
+#personal .ptprice strong{display:block;font-size:24px;margin:8px 0}
+#personal .ptprice p{margin:0;color:var(--sub);font-size:12px;line-height:1.7}
+#personal .personal-head,#personal .targets,#personal .personal>.trainer-card{display:none!important}
+@media(max-width:1000px){#personal .pt-intro,#personal .trainer-showcase,#personal .secondary-photo{grid-template-columns:1fr}#personal .trainer-hero-photo{min-height:640px}#personal .trainer{padding:0 36px 42px}#personal .pt-intro{padding:52px 36px 42px}#personal .ptprices{padding:0 36px 46px}}
+@media(max-width:680px){#personal .personal{border-radius:20px}#personal .pt-intro{padding:36px 20px 28px;gap:28px}#personal .trainer{padding:0 20px 34px}#personal .trainer-showcase{min-height:0}#personal .trainer-hero-photo{min-height:0;aspect-ratio:3/4}#personal .trainer-card-premium,#personal .champion-block{padding:24px 20px}#personal .result-premium{grid-template-columns:52px 1fr;gap:8px 12px}#personal .result-premium .rank{grid-column:2}#personal .secondary-photo-visual{min-height:0;aspect-ratio:1.19/1}#personal .secondary-copy{padding:28px 22px}#personal .ptprices{grid-template-columns:1fr;padding:0 20px 34px}}
+`;
+    v8.head.appendChild(style);
+    v8.title='BASE GYM24｜V9 Preview';
+    const robots=v8.querySelector('meta[name="robots"]');
+    if(robots)robots.setAttribute('content','noindex,nofollow');
+    document.open();
+    document.write('<!doctype html>'+v8.documentElement.outerHTML);
+    document.close();
+  }catch(e){
+    document.getElementById('loading').innerHTML='<div class="error"><strong>読み込みに失敗しました</strong><span>ページを再読み込みしてください。</span></div>';
+    console.error(e);
+  }
+})();
+</script>
+</body>
+</html>
