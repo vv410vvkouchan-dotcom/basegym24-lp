@@ -12,7 +12,7 @@
 <script>
 (async()=>{
   try{
-    let html=await fetch('./v10-preview.html?rev=14',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+    let html=await fetch('./v10-preview.html?rev=15',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
     html=html
       .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
