@@ -12,7 +12,7 @@
 <script>
 (async()=>{
   try{
-    let html=await fetch('./v10-preview.html?rev=13',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+    let html=await fetch('./v10-preview.html?rev=14',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
     html=html
       .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
@@ -29,6 +29,7 @@
       .replace('<div class="campaign-cond">体験当日のご入会で</div><small>オリジナル</small>','<div class="campaign-cond">入会特典</div><small>オリジナル</small>')
       .replace('LIMITED BENEFIT','期間限定')
       .replace('PRESENT','入会特典')
+      .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。')
       .replace('BASE GYM24 V10 Preview','BASE GYM24 V12 Preview');
 
     document.open();
