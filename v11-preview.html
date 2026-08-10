@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>BASE GYM24 V11 Preview</title>
+<style>html,body{margin:0;background:#06080b}iframe{display:block;width:100%;border:0;min-height:100vh}</style>
+</head>
+<body>
+<iframe id="preview" src="./v10-preview.html?rev=11" title="BASE GYM24 V11 Preview"></iframe>
+<script>
+const frame=document.getElementById('preview');
+function syncHeight(){try{const d=frame.contentDocument;if(d&&d.documentElement){frame.style.height=Math.max(d.documentElement.scrollHeight,d.body?.scrollHeight||0)+'px';}}catch(e){}}
+frame.addEventListener('load',()=>{
+  const apply=()=>{
+    try{
+      const d=frame.contentDocument;
+      if(!d)return false;
+      const cards=[...d.querySelectorAll('#campaign .campaign-card')];
+      if(cards.length<5)return false;
+      cards[0].innerHTML='<div class="campaign-no">特典 <b>1</b></div><div class="campaign-cond">期間限定</div><small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>';
+      cards[1].innerHTML='<div class="campaign-no">特典 <b>2</b></div><div class="campaign-cond ghost">LIMITED BENEFIT</div><small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料。</p>';
+      cards[2].innerHTML='<div class="campaign-no">特典 <b>3</b></div><div class="campaign-cond">入会から5か月間</div><small>月会費</small><strong class="gift">2,200<span>円引き</span></strong><p>5か月間、お得な月会費で続けられます。</p>';
+      cards[3].innerHTML='<div class="campaign-no">特典 <b>4</b></div><div class="campaign-cond">2か月無料</div><small>水素水・サプリメント</small><strong class="gift">サーバー<span>2か月無料</span></strong><p>トレーニング中の水分・栄養補給をサポート。</p>';
+      cards[4].innerHTML='<div class="campaign-no">特典 <b>5</b></div><div class="campaign-cond">PRESENT</div><small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてシェイカーをプレゼント。</p>';
+      const intro=d.querySelector('#campaign .campaign-top p');
+      if(intro)intro.textContent='この夏、トレーニングを始める方を応援。月会費・入会金・オプションまでお得になる、8月限定の入会キャンペーンです。';
+      const note=d.querySelector('#campaign .campaign-bottom > p');
+      if(note)note.textContent='※キャンペーンの適用条件・対象プラン・特典の詳細は入会時の案内をご確認ください。';
+      d.title='BASE GYM24｜V11 August Campaign Preview';
+      syncHeight();
+      new ResizeObserver(syncHeight).observe(d.body);
+      return true;
+    }catch(e){return false;}
+  };
+  if(!apply()){
+    let n=0;const timer=setInterval(()=>{n++;if(apply()||n>40)clearInterval(timer);},250);
+  }
+});
+window.addEventListener('resize',syncHeight);
+</script>
+</body>
+</html>
