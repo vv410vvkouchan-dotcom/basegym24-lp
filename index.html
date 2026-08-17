@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>BASE GYM24 V12 Preview</title>
+<meta name="robots" content="index,follow">
+<title>BASE GYM24｜本厚木の24時間ジム</title>
 <style>html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.loading strong{display:block;font-size:22px;margin-bottom:8px}.loading span{color:#aeb7c5;font-size:13px}.error{color:#ffb4b4}</style>
 </head>
 <body>
-<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>V12を読み込んでいます…</span></div></div>
+<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>ページを読み込んでいます…</span></div></div>
 <script>
 (async()=>{
 try{
   let html=await fetch('./v10-preview.html?rev=v12-campaign-gold-floor-fit-20260817',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+  html=html.replace("v8.title='BASE GYM24｜V10 August Campaign Preview';","v8.title='BASE GYM24｜本厚木の24時間ジム';").replace("if(robots)robots.setAttribute('content','noindex,nofollow');","if(robots)robots.setAttribute('content','index,follow');");
   const runtime=`
     v8.querySelectorAll('#campaign,.august-campaign,.campaign-chip,#campaign-billboard,#floor-map').forEach(el=>el.remove());
     const strongStyle=v8.createElement('style');
