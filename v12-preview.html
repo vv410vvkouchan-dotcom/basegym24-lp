@@ -12,7 +12,7 @@
 <script>
 (async()=>{
 try{
-  let html=await fetch('./v10-preview.html?rev=v12-campaign-hero-20260817',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+  let html=await fetch('./v10-preview.html?rev=v12-campaign-hero-20260817-dedup',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
   html=html
     .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
@@ -38,14 +38,17 @@ try{
     .campaign-billboard h2{margin:0;font-size:clamp(48px,6.8vw,88px);line-height:.94;letter-spacing:-.06em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard .cb-lead{margin:17px 0 0;color:#dfcaa1;font-size:14px;line-height:1.85;max-width:650px}
     .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:20px 13px 18px;border:1px solid rgba(255,211,128,.44);border-radius:14px;background:linear-gradient(145deg,rgba(255,190,76,.19),rgba(255,255,255,.035));box-shadow:0 16px 38px rgba(0,0,0,.20)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#d99418,#ffe6ad,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e7c47e;font-size:8px;font-weight:950;letter-spacing:.11em;margin-bottom:8px}.campaign-billboard .cb-benefit b{display:block;color:#fff7e7;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ffc766;font-size:23px;line-height:1.04;margin-top:5px;letter-spacing:-.045em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,220,151,.68);background:linear-gradient(145deg,rgba(255,190,76,.25),rgba(255,255,255,.04))}
     .campaign-billboard .cb-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d99418,#ffc653)!important;color:#171008!important;box-shadow:0 12px 32px rgba(255,184,74,.30)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,220,151,.52)!important;background:rgba(255,188,75,.09)!important;color:#fff0cf!important}
-    .august-campaign{background:linear-gradient(180deg,#130c04 0%,#080706 100%)!important;border-top:1px solid rgba(255,199,102,.18)!important;border-bottom:1px solid rgba(255,199,102,.24)!important}.campaign-eyebrow,.campaign-top h2 span,.campaign-no b,.campaign-card>strong{color:#ffc766!important}.campaign-deadline{border-color:rgba(255,199,102,.62)!important;background:rgba(255,184,74,.11)!important;box-shadow:0 0 66px rgba(255,184,74,.18)!important}.campaign-deadline small{color:#ffe0a3!important}.campaign-cond,.campaign-cond.ghost{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;border:0!important}.campaign-card{border-color:rgba(255,199,102,.28)!important;background:linear-gradient(145deg,rgba(255,184,74,.09),rgba(255,255,255,.022))!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip{border-color:rgba(255,199,102,.68)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 10px 28px rgba(255,184,74,.24)!important}.campaign-chip b{background:#171008!important;color:#ffd980!important}.campaign-chip span,.campaign-chip i{color:#171008!important}
+    .campaign-chip{border-color:rgba(255,199,102,.68)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 10px 28px rgba(255,184,74,.24)!important}.campaign-chip b{background:#171008!important;color:#ffd980!important}.campaign-chip span,.campaign-chip i{color:#171008!important}
     @media(max-width:980px){.campaign-billboard .cb-grid{grid-template-columns:1fr;gap:28px}.campaign-billboard .cb-benefits{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:680px){.campaign-billboard{padding:38px 0 40px}.campaign-billboard .cb-date strong{font-size:64px}.campaign-billboard .cb-date span{font-size:10px}.campaign-billboard h2{font-size:clamp(40px,13vw,56px)}.campaign-billboard .cb-lead{font-size:12px;line-height:1.75}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:8px}.campaign-billboard .cb-benefit{padding:15px 12px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:19px}.campaign-billboard .cb-benefit:last-child{grid-column:1/-1}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
     \`;
     v8.head.appendChild(strongStyle);
 
+    const oldCampaign=v8.querySelector('#campaign');
+    if(oldCampaign)oldCampaign.remove();
     const oldBillboard=v8.querySelector('#campaign-billboard');
     if(oldBillboard)oldBillboard.remove();
+
     const billboard=v8.createElement('section');
     billboard.className='campaign-billboard';
     billboard.id='campaign-billboard';
@@ -56,7 +59,7 @@ try{
           <div class="cb-date"><strong>8.31</strong><span>月曜まで</span></div>
           <h2>今だけの<br><em>5大入会特典。</em></h2>
           <p class="cb-lead">初月・翌月会費0円、入会金0円。さらに5か月間の月会費割引など、期間限定の入会キャンペーンです。</p>
-          <div class="cb-actions"><a class="btn cb-primary" href="#campaign">5大特典を詳しく見る ↓</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a></div>
+          <div class="cb-actions"><a class="btn cb-primary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/home" target="_blank" rel="noopener">WEB入会へ</a></div>
         </div>
         <div class="cb-benefits">
           <div class="cb-benefit"><small>BENEFIT 01</small><b>初月・翌月会費</b><strong>0円</strong></div>
