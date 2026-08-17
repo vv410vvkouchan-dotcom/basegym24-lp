@@ -8,22 +8,42 @@
 <style>html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.loading strong{display:block;font-size:22px;margin-bottom:8px}.loading span{color:#aeb7c5;font-size:13px}.error{color:#ffb4b4}</style>
 </head>
 <body>
-<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>100坪超・店内マップ版を読み込んでいます…</span></div></div>
+<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>V12＋100坪超・店内マップ版を読み込んでいます…</span></div></div>
 <script>
 (async()=>{
   try{
-    let html=await fetch('./index.html?rev=v13-floor-map',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('index');return r.text()});
+    /* V12と同じベースを読み込み、V12の変更をすべて適用 */
+    let html=await fetch('./v10-preview.html?rev=15',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
+    html=html
+      .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
+      .replace('<small>初月月会費</small><strong>0<span>円</span></strong><p>今ならお得にスタート！</p>', '<small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>')
+      .replace('<small>2ヶ月目月会費</small><strong>50<span>%OFF</span></strong><p>続けやすい料金で理想の自分へ。</p>', '<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料。</p>')
+      .replace('<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料！</p>', '<small>入会から5か月間の月会費</small><strong class="gift">2,200<span>円引き</span></strong><p>5か月間、お得な月会費で続けられます。</p>')
+      .replace('<small>プロテイン</small><strong class="gift">1杯<span>無料券</span></strong><p>プレゼント！</p>', '<small>水素水・サプリメントサーバー</small><strong class="gift">2ヶ月<span>無料</span></strong><p>水分・栄養補給をサポート。</p>')
+      .replace('<small>水素水</small><strong class="gift">2ヶ月<span>無料</span></strong><p>プレゼント！</p>', '<small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてプレゼント。</p>')
+      .replace('この夏、トレーニングを始める方を応援。体験当日のご入会で使える特典を含む、期間限定キャンペーンです。','この夏、トレーニングを始める方を応援。初月・翌月会費無料、入会金無料、さらに5か月間の月会費割引など、8月限定の入会キャンペーンです。')
+      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>初月・翌月の月会費</small>','<div class="campaign-cond">期間限定</div><small>初月・翌月の月会費</small>')
+      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>入会金</small>','<div class="campaign-cond ghost">期間限定</div><small>入会金</small>')
+      .replace('<div class="campaign-cond ghost">LIMITED BENEFIT</div><small>入会から5か月間の月会費</small>','<div class="campaign-cond">入会から5か月間</div><small>月会費</small>')
+      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>水素水・サプリメントサーバー</small>','<div class="campaign-cond">2か月無料</div><small>水素水・サプリメントサーバー</small>')
+      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>オリジナル</small>','<div class="campaign-cond">入会特典</div><small>オリジナル</small>')
+      .replace('LIMITED BENEFIT','期間限定')
+      .replace('PRESENT','入会特典')
+      .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。')
+      .replace('BASE GYM24 V10 Preview','BASE GYM24 V13 Preview');
+
+    /* V13では、上記V12を一切削らず、このブロックだけ追加 */
     const css=`
 /* ===== Ver.13 100坪超 / FLOOR MAP ===== */
 .floor-map-section{position:relative;overflow:hidden;background:linear-gradient(180deg,#080b10 0%,#05070a 100%)}
 .floor-map-section:before{content:"";position:absolute;width:42rem;height:42rem;right:-18rem;top:-20rem;border-radius:50%;background:radial-gradient(circle,rgba(47,111,255,.16),transparent 68%);pointer-events:none}
 .floor-map-head{display:grid;grid-template-columns:.82fr 1.18fr;gap:58px;align-items:end;margin-bottom:38px}
-.floor-map-titlemark{max-width:560px;height:auto;object-fit:contain;object-position:left center;filter:invert(1);opacity:.96}
+.floor-map-titlemark{max-width:560px;height:auto !important;object-fit:contain !important;object-position:left center;filter:invert(1);opacity:.96}
 .floor-map-copy h2{font-size:clamp(36px,5.2vw,68px);margin:0 0 16px;line-height:1.04}
 .floor-map-copy p{margin:0;color:var(--sub);font-size:14px;line-height:1.9;max-width:660px}
 .floor-map-card{position:relative;padding:28px;border:1px solid rgba(255,255,255,.12);border-radius:24px;background:#f4f5f7;box-shadow:0 28px 80px rgba(0,0,0,.28)}
-.floor-map-card img{display:block;width:100%;height:auto;object-fit:contain}
+.floor-map-card img{display:block;width:100%;height:auto !important;object-fit:contain !important}
 .floor-map-zones{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:15px}
 .floor-map-zone{padding:14px 12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
 .floor-map-zone small{display:block;color:var(--blue2);font-size:8px;font-weight:900;letter-spacing:.12em;margin-bottom:5px}
@@ -48,11 +68,9 @@
         <p>100坪を超える店内を、5つのトレーニングエリアに分けています。やりたいトレーニングへ迷わず移動でき、初心者から経験者まで自分の目的に合わせて使いやすいレイアウトです。</p>
       </div>
     </div>
-
     <div class="floor-map-card">
       <img src="https://himitsu-kichi24.com/assets/images/machine_map.png" alt="BASE GYM24 店内マップ 5つのトレーニングエリア" loading="lazy">
     </div>
-
     <div class="floor-map-zones">
       <div class="floor-map-zone"><small>01 / CARDIO</small><strong>有酸素マシンエリア</strong></div>
       <div class="floor-map-zone"><small>02 / WEIGHT STACK</small><strong>ウェイトスタックマシンエリア</strong></div>
@@ -60,7 +78,6 @@
       <div class="floor-map-zone"><small>04 / PLATE LOADED</small><strong>プレートロードマシンエリア</strong></div>
       <div class="floor-map-zone"><small>05 / STRETCH</small><strong>ストレッチエリア</strong></div>
     </div>
-
     <div class="floor-map-cta">
       <p><strong>実際の広さ・設備を見てから決めたい方へ。</strong><br>無料見学で、店内の雰囲気とマシンを確認できます。</p>
       <a class="btn btn-primary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank">無料見学を予約する →</a>
@@ -73,7 +90,6 @@
     const galleryMarker='<section class="section photo-section" id="gallery">';
     if(!html.includes(galleryMarker)) throw new Error('gallery marker');
     html=html.replace(galleryMarker,section+'\n'+galleryMarker);
-    html=html.replace('<title>BASE GYM24｜本厚木の24時間ジム</title>','<title>BASE GYM24｜100坪超・店内マップ Preview</title>');
 
     document.open();
     document.write(html);
