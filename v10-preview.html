@@ -16,7 +16,7 @@ html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-seri
   try{
     const [v8Text,v7Text]=await Promise.all([
       fetch('./v8-preview.html?rev=10',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V8');return r.text()}),
-      fetch('./index.html?rev=10',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V7');return r.text()})
+      fetch('./index-v7-backup.html?rev=10',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V7');return r.text()})
     ]);
     const parser=new DOMParser();
     const v8=parser.parseFromString(v8Text,'text/html');
@@ -57,7 +57,6 @@ html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-seri
     const facts=v8.querySelector('.facts')?.closest('.factbar,section,div');
     const hero=v8.querySelector('.hero');
     if(facts && facts.parentNode){facts.parentNode.insertBefore(campaign,facts.nextSibling);}else if(hero&&hero.parentNode){hero.parentNode.insertBefore(campaign,hero.nextSibling);}else{v8.body.insertBefore(campaign,v8.body.firstChild);}
-
     /* Add a compact campaign chip to hero */
     const heroInner=v8.querySelector('.hero-inner');
     if(heroInner){
