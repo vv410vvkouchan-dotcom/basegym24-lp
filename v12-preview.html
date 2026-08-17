@@ -12,7 +12,7 @@
 <script>
 (async()=>{
 try{
-  let html=await fetch('./v10-preview.html?rev=v12-campaign-strong-3',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+  let html=await fetch('./v10-preview.html?rev=v12-campaign-hero-20260817',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
   html=html
     .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
@@ -27,23 +27,25 @@ try{
     .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。');
 
   const runtime=`
-    /* V12 STRONG CAMPAIGN BILLBOARD */
+    /* V12 HERO CAMPAIGN BILLBOARD */
     const strongStyle=v8.createElement('style');
     strongStyle.textContent=\`
-    .campaign-billboard{position:relative;overflow:hidden;padding:46px 0 42px;background:radial-gradient(circle at 88% 5%,rgba(255,196,84,.38),transparent 25rem),radial-gradient(circle at 8% 92%,rgba(255,126,0,.18),transparent 28rem),linear-gradient(135deg,#271704 0%,#0e0904 48%,#1c1004 100%);border-top:2px solid rgba(255,207,112,.72);border-bottom:2px solid rgba(255,207,112,.52);box-shadow:0 20px 70px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05)}
-    .campaign-billboard:before{content:'CAMPAIGN';position:absolute;right:-.03em;top:-.20em;font-size:min(19vw,270px);font-weight:1000;line-height:1;letter-spacing:-.08em;color:rgba(255,255,255,.035);pointer-events:none}
-    .campaign-billboard .cb-grid{position:relative;z-index:1;display:grid;grid-template-columns:.78fr 1.22fr;gap:44px;align-items:center}
-    .campaign-billboard .cb-tag{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#ffca62;color:#171008;font-size:10px;font-weight:1000;letter-spacing:.1em;box-shadow:0 7px 20px rgba(255,184,74,.22)}
-    .campaign-billboard .cb-date{display:flex;align-items:flex-end;gap:12px;margin:14px 0 13px}.campaign-billboard .cb-date strong{font-size:clamp(58px,7vw,92px);line-height:.8;letter-spacing:-.065em;color:#ffc766;text-shadow:0 0 34px rgba(255,199,102,.18)}.campaign-billboard .cb-date span{font-size:12px;font-weight:900;color:#ffe9bd;padding-bottom:5px}
-    .campaign-billboard h2{margin:0;font-size:clamp(43px,6vw,78px);line-height:.96;letter-spacing:-.055em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard .cb-lead{margin:15px 0 0;color:#d8c59f;font-size:13px;line-height:1.8;max-width:620px}
-    .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:17px 12px 16px;border:1px solid rgba(255,207,112,.38);border-radius:13px;background:linear-gradient(145deg,rgba(255,190,76,.17),rgba(255,255,255,.03));box-shadow:0 14px 32px rgba(0,0,0,.18)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#d99418,#ffe3a6,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e2bc72;font-size:8px;font-weight:950;letter-spacing:.1em;margin-bottom:7px}.campaign-billboard .cb-benefit b{display:block;color:#fff5df;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ffc766;font-size:22px;line-height:1.05;margin-top:4px;letter-spacing:-.04em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,215,137,.58);background:linear-gradient(145deg,rgba(255,190,76,.22),rgba(255,255,255,.035))}
-    .campaign-billboard .cb-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 11px 28px rgba(255,184,74,.26)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,215,137,.45)!important;background:rgba(255,188,75,.08)!important;color:#ffe9bd!important}
-    .august-campaign{background:linear-gradient(180deg,#120c05 0%,#080706 100%)!important;border-bottom:1px solid rgba(255,199,102,.24)!important}.campaign-eyebrow,.campaign-top h2 span,.campaign-no b,.campaign-card>strong{color:#ffc766!important}.campaign-deadline{border-color:rgba(255,199,102,.58)!important;background:rgba(255,184,74,.10)!important;box-shadow:0 0 60px rgba(255,184,74,.16)!important}.campaign-deadline small{color:#ffe0a3!important}.campaign-cond,.campaign-cond.ghost{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;border:0!important}.campaign-card{border-color:rgba(255,199,102,.26)!important;background:linear-gradient(145deg,rgba(255,184,74,.08),rgba(255,255,255,.02))!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip{border-color:rgba(255,199,102,.62)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip b{background:#171008!important;color:#ffd980!important}.campaign-chip span,.campaign-chip i{color:#171008!important}
-    @media(max-width:980px){.campaign-billboard .cb-grid{grid-template-columns:1fr;gap:24px}.campaign-billboard .cb-benefits{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:680px){.campaign-billboard{padding:34px 0 36px}.campaign-billboard .cb-date strong{font-size:58px}.campaign-billboard .cb-date span{font-size:10px}.campaign-billboard h2{font-size:clamp(37px,12vw,52px)}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:7px}.campaign-billboard .cb-benefit{padding:14px 11px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:18px}.campaign-billboard .cb-benefit:last-child{grid-column:1/-1}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
+    .campaign-billboard{position:relative;overflow:hidden;padding:56px 0 54px;background:radial-gradient(circle at 88% 8%,rgba(255,198,83,.40),transparent 25rem),radial-gradient(circle at 9% 92%,rgba(255,125,0,.20),transparent 28rem),linear-gradient(135deg,#2a1803 0%,#100904 48%,#1f1103 100%);border-top:2px solid rgba(255,211,128,.82);border-bottom:2px solid rgba(255,211,128,.62);box-shadow:0 24px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06)}
+    .campaign-billboard:before{content:'CAMPAIGN';position:absolute;right:-.03em;top:-.23em;font-size:min(20vw,290px);font-weight:1000;line-height:1;letter-spacing:-.08em;color:rgba(255,255,255,.045);pointer-events:none}
+    .campaign-billboard .cb-grid{position:relative;z-index:1;display:grid;grid-template-columns:.76fr 1.24fr;gap:48px;align-items:center}
+    .campaign-billboard .cb-tag{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:#ffd06b;color:#171008;font-size:11px;font-weight:1000;letter-spacing:.1em;box-shadow:0 8px 22px rgba(255,184,74,.26)}
+    .campaign-billboard .cb-date{display:flex;align-items:flex-end;gap:13px;margin:16px 0 15px}.campaign-billboard .cb-date strong{font-size:clamp(64px,8vw,106px);line-height:.78;letter-spacing:-.07em;color:#ffc766;text-shadow:0 0 40px rgba(255,199,102,.22)}.campaign-billboard .cb-date span{font-size:13px;font-weight:950;color:#fff0cf;padding-bottom:6px}
+    .campaign-billboard h2{margin:0;font-size:clamp(48px,6.8vw,88px);line-height:.94;letter-spacing:-.06em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard .cb-lead{margin:17px 0 0;color:#dfcaa1;font-size:14px;line-height:1.85;max-width:650px}
+    .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:20px 13px 18px;border:1px solid rgba(255,211,128,.44);border-radius:14px;background:linear-gradient(145deg,rgba(255,190,76,.19),rgba(255,255,255,.035));box-shadow:0 16px 38px rgba(0,0,0,.20)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#d99418,#ffe6ad,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e7c47e;font-size:8px;font-weight:950;letter-spacing:.11em;margin-bottom:8px}.campaign-billboard .cb-benefit b{display:block;color:#fff7e7;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ffc766;font-size:23px;line-height:1.04;margin-top:5px;letter-spacing:-.045em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,220,151,.68);background:linear-gradient(145deg,rgba(255,190,76,.25),rgba(255,255,255,.04))}
+    .campaign-billboard .cb-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d99418,#ffc653)!important;color:#171008!important;box-shadow:0 12px 32px rgba(255,184,74,.30)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,220,151,.52)!important;background:rgba(255,188,75,.09)!important;color:#fff0cf!important}
+    .august-campaign{background:linear-gradient(180deg,#130c04 0%,#080706 100%)!important;border-top:1px solid rgba(255,199,102,.18)!important;border-bottom:1px solid rgba(255,199,102,.24)!important}.campaign-eyebrow,.campaign-top h2 span,.campaign-no b,.campaign-card>strong{color:#ffc766!important}.campaign-deadline{border-color:rgba(255,199,102,.62)!important;background:rgba(255,184,74,.11)!important;box-shadow:0 0 66px rgba(255,184,74,.18)!important}.campaign-deadline small{color:#ffe0a3!important}.campaign-cond,.campaign-cond.ghost{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;border:0!important}.campaign-card{border-color:rgba(255,199,102,.28)!important;background:linear-gradient(145deg,rgba(255,184,74,.09),rgba(255,255,255,.022))!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip{border-color:rgba(255,199,102,.68)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 10px 28px rgba(255,184,74,.24)!important}.campaign-chip b{background:#171008!important;color:#ffd980!important}.campaign-chip span,.campaign-chip i{color:#171008!important}
+    @media(max-width:980px){.campaign-billboard .cb-grid{grid-template-columns:1fr;gap:28px}.campaign-billboard .cb-benefits{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:680px){.campaign-billboard{padding:38px 0 40px}.campaign-billboard .cb-date strong{font-size:64px}.campaign-billboard .cb-date span{font-size:10px}.campaign-billboard h2{font-size:clamp(40px,13vw,56px)}.campaign-billboard .cb-lead{font-size:12px;line-height:1.75}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:8px}.campaign-billboard .cb-benefit{padding:15px 12px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:19px}.campaign-billboard .cb-benefit:last-child{grid-column:1/-1}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
     \`;
     v8.head.appendChild(strongStyle);
 
+    const oldBillboard=v8.querySelector('#campaign-billboard');
+    if(oldBillboard)oldBillboard.remove();
     const billboard=v8.createElement('section');
     billboard.className='campaign-billboard';
     billboard.id='campaign-billboard';
@@ -54,7 +56,7 @@ try{
           <div class="cb-date"><strong>8.31</strong><span>月曜まで</span></div>
           <h2>今だけの<br><em>5大入会特典。</em></h2>
           <p class="cb-lead">初月・翌月会費0円、入会金0円。さらに5か月間の月会費割引など、期間限定の入会キャンペーンです。</p>
-          <div class="cb-actions"><a class="btn cb-primary" href="#campaign">特典を詳しく見る ↓</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a></div>
+          <div class="cb-actions"><a class="btn cb-primary" href="#campaign">5大特典を詳しく見る ↓</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a></div>
         </div>
         <div class="cb-benefits">
           <div class="cb-benefit"><small>BENEFIT 01</small><b>初月・翌月会費</b><strong>0円</strong></div>
@@ -64,14 +66,14 @@ try{
           <div class="cb-benefit"><small>BENEFIT 05</small><b>オリジナル</b><strong>シェイカー</strong></div>
         </div>
       </div></div>\`;
-    const factsBar=v8.querySelector('.facts')?.closest('.factbar,section,div');
     const heroSection=v8.querySelector('.hero');
-    if(factsBar&&factsBar.parentNode){factsBar.parentNode.insertBefore(billboard,factsBar.nextSibling)}
-    else if(heroSection&&heroSection.parentNode){heroSection.parentNode.insertBefore(billboard,heroSection.nextSibling)}
+    if(heroSection&&heroSection.parentNode){heroSection.parentNode.insertBefore(billboard,heroSection.nextSibling)}
     else{v8.body.insertBefore(billboard,v8.body.firstChild)}
   `;
 
-  html=html.replace('    v8.head.appendChild(style);','    v8.head.appendChild(style);\n'+runtime);
+  const hook='    v8.head.appendChild(style);';
+  if(!html.includes(hook))throw new Error('campaign hook not found');
+  html=html.replace(hook,hook+'\n'+runtime);
   html=html.replace("v8.title='BASE GYM24｜V10 August Campaign Preview';","v8.title='BASE GYM24｜V12 Campaign Strong';");
 
   document.open();
