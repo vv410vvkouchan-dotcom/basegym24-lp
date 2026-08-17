@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>BASE GYM24 V13 Full LP Campaign Preview</title>
+<title>BASE GYM24 V13 Campaign Strong Preview</title>
 <style>html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.loading strong{display:block;font-size:22px;margin-bottom:8px}.loading span{color:#aeb7c5;font-size:13px}.error{color:#ffb4b4}</style>
 </head>
 <body>
@@ -12,8 +12,9 @@
 <script>
 (async()=>{
   try{
-    let html=await fetch('./v10-preview.html?rev=15',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+    let html=await fetch('./v10-preview.html?rev=13strong3',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
+    /* V12確定内容をそのまま維持 */
     html=html
       .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
       .replace('<small>初月月会費</small><strong>0<span>円</span></strong><p>今ならお得にスタート！</p>', '<small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>')
@@ -23,45 +24,39 @@
       .replace('<small>水素水</small><strong class="gift">2ヶ月<span>無料</span></strong><p>プレゼント！</p>', '<small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてプレゼント。</p>')
       .replace('この夏、トレーニングを始める方を応援。体験当日のご入会で使える特典を含む、期間限定キャンペーンです。','この夏、トレーニングを始める方を応援。初月・翌月会費無料、入会金無料、さらに5か月間の月会費割引など、8月限定の入会キャンペーンです。')
       .replace('<div class="campaign-cond">体験当日のご入会で</div><small>初月・翌月の月会費</small>','<div class="campaign-cond">期間限定</div><small>初月・翌月の月会費</small>')
-      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>入会金</small>','<div class="campaign-cond ghost">期間限定</div><small>入会金</small>')
+      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>入会金</small>','<div class="campaign-cond">期間限定</div><small>入会金</small>')
       .replace('<div class="campaign-cond ghost">LIMITED BENEFIT</div><small>入会から5か月間の月会費</small>','<div class="campaign-cond">入会から5か月間</div><small>月会費</small>')
       .replace('<div class="campaign-cond">体験当日のご入会で</div><small>水素水・サプリメントサーバー</small>','<div class="campaign-cond">2か月無料</div><small>水素水・サプリメントサーバー</small>')
       .replace('<div class="campaign-cond">体験当日のご入会で</div><small>オリジナル</small>','<div class="campaign-cond">入会特典</div><small>オリジナル</small>')
       .replaceAll('LIMITED BENEFIT','期間限定')
       .replaceAll('PRESENT','入会特典')
-      .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。')
-      .replace('BASE GYM24 V10 Preview','BASE GYM24 V13 Full LP Campaign Preview');
+      .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。');
 
-    const strongCampaignRuntime=`
-    const strongCampaignStyle=v8.createElement('style');
-    strongCampaignStyle.textContent=\`
-    /* V13 STRONG CAMPAIGN — V12本体はそのまま */
-    .august-campaign{padding-top:78px!important;padding-bottom:78px!important;background:radial-gradient(circle at 84% 6%,rgba(255,187,67,.30),transparent 27rem),radial-gradient(circle at 8% 100%,rgba(255,135,22,.14),transparent 28rem),linear-gradient(180deg,#1b1207 0%,#0b0805 100%)!important;border-top:1px solid rgba(255,199,102,.35)!important;border-bottom:1px solid rgba(255,199,102,.35)!important}
-    .august-campaign:before{content:'CAMPAIGN'!important;right:-.03em!important;top:-.22em!important;font-size:min(24vw,340px)!important;color:rgba(255,255,255,.026)!important}
-    .campaign-top{grid-template-columns:minmax(0,1fr) 210px!important;gap:56px!important;align-items:center!important;margin-bottom:44px!important}
-    .campaign-eyebrow{display:inline-flex!important;align-items:center!important;width:max-content!important;min-height:32px!important;padding:0 13px!important;border:1px solid rgba(255,199,102,.40)!important;border-radius:999px!important;background:rgba(255,184,74,.10)!important;color:#ffd98a!important;font-size:10px!important;letter-spacing:.18em!important;margin-bottom:16px!important}
-    .campaign-top h2{font-size:clamp(46px,6.4vw,86px)!important;line-height:.97!important;letter-spacing:-.055em!important;margin-bottom:18px!important}
-    .campaign-top h2 span{color:#ffc766!important;text-shadow:0 0 28px rgba(255,199,102,.12)!important}
-    .campaign-top p{font-size:14px!important;line-height:1.9!important;color:#d2c09a!important;max-width:760px!important}
-    .campaign-deadline{width:200px!important;height:200px!important;border:2px solid rgba(255,199,102,.58)!important;background:radial-gradient(circle,rgba(255,184,74,.16),rgba(255,184,74,.05))!important;box-shadow:0 0 0 10px rgba(255,184,74,.035),0 0 80px rgba(255,184,74,.17)!important}
-    .campaign-deadline small{color:#ffe3a6!important;font-size:10px!important}.campaign-deadline strong{font-size:58px!important;color:#ffc766!important;text-shadow:0 0 24px rgba(255,199,102,.16)!important}.campaign-deadline span{color:#ffe7b7!important;font-size:12px!important}
-    .campaign-grid{gap:12px!important}
-    .campaign-card{position:relative!important;overflow:hidden!important;padding:26px 20px 28px!important;border:1px solid rgba(255,199,102,.30)!important;background:linear-gradient(145deg,rgba(255,184,74,.11),rgba(255,255,255,.025))!important;box-shadow:0 18px 46px rgba(0,0,0,.18)!important}
-    .campaign-card:before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#d99418,#ffd98a,#d99418)}
-    .campaign-no{color:#efe2c8!important}.campaign-no b{color:#ffc766!important}
-    .campaign-cond,.campaign-cond.ghost{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;border-color:transparent!important;box-shadow:0 6px 18px rgba(255,184,74,.16)!important}
-    .campaign-card>small{color:#f1e7d3!important}.campaign-card>strong{color:#ffc766!important;text-shadow:0 0 22px rgba(255,199,102,.10)!important}.campaign-card>p{color:#bda986!important}
-    .campaign-bottom{margin-top:28px!important;padding-top:24px!important;border-color:rgba(255,199,102,.18)!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 12px 30px rgba(255,184,74,.22)!important}.campaign-actions .btn-white{background:#fff4dc!important;color:#171008!important}
-    .campaign-chip{margin-bottom:22px!important;padding:10px 14px 10px 10px!important;border:1px solid rgba(255,199,102,.64)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 12px 34px rgba(255,184,74,.24)!important;animation:v13Pulse 2.2s ease-in-out infinite!important}
-    .campaign-chip b{background:#171008!important;color:#ffd98a!important}.campaign-chip span,.campaign-chip i{color:#171008!important;font-weight:950!important}
-    @keyframes v13Pulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-    @media(max-width:760px){.august-campaign{padding-top:52px!important;padding-bottom:54px!important}.campaign-top{grid-template-columns:1fr!important;gap:24px!important}.campaign-deadline{width:auto!important;height:auto!important;border-radius:18px!important;display:grid!important;grid-template-columns:auto auto auto!important;justify-content:start!important;padding:18px 20px!important}.campaign-deadline strong{font-size:38px!important}.campaign-top h2{font-size:clamp(40px,12vw,58px)!important}.campaign-grid{grid-template-columns:1fr 1fr!important}.campaign-card:last-child{grid-column:1/-1!important}}
-    @media(max-width:480px){.campaign-grid{grid-template-columns:1fr!important}.campaign-card:last-child{grid-column:auto!important}.campaign-card{padding:21px 18px 22px!important}.campaign-top p{font-size:12.5px!important}.campaign-chip{width:max-content!important;max-width:100%!important;flex-wrap:wrap!important}}
-    \`;
-    v8.head.appendChild(strongCampaignStyle);
-    `;
-
-    html=html.replace('    v8.head.appendChild(style);','    v8.head.appendChild(style);\n'+strongCampaignRuntime);
+    /* V10内の既存キャンペーンを大幅に強調。LP本体は削除しない */
+    html=html
+      .replace('.august-campaign{position:relative;overflow:hidden;background:radial-gradient(circle at 86% 4%,rgba(47,111,255,.25),transparent 26rem),linear-gradient(180deg,#0b111b 0%,#06080b 100%)}',
+        '.august-campaign{position:relative;overflow:hidden;padding-top:82px!important;padding-bottom:86px!important;border-top:1px solid rgba(255,199,102,.38)!important;border-bottom:1px solid rgba(255,199,102,.38)!important;background:radial-gradient(circle at 86% 4%,rgba(255,184,74,.30),transparent 28rem),radial-gradient(circle at 8% 92%,rgba(217,148,24,.16),transparent 26rem),linear-gradient(180deg,#1a1106 0%,#0b0804 55%,#171006 100%)!important}')
+      .replace('.campaign-eyebrow{font-size:10px;letter-spacing:.22em;font-weight:950;color:#7ca4ff;margin-bottom:12px}',
+        '.campaign-eyebrow{display:inline-flex;align-items:center;min-height:32px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,199,102,.38);background:rgba(255,184,74,.12);font-size:10px;letter-spacing:.18em;font-weight:950;color:#ffd98a;margin-bottom:16px}')
+      .replace('.campaign-top h2{margin-bottom:15px}.campaign-top h2 span{color:#7ca4ff}',
+        '.campaign-top h2{font-size:clamp(48px,6.5vw,86px)!important;line-height:.98!important;letter-spacing:-.05em!important;margin-bottom:18px}.campaign-top h2 span{color:#ffc766!important;text-shadow:0 0 32px rgba(255,199,102,.14)}')
+      .replace('.campaign-deadline{width:170px;height:170px;border-radius:50%;border:1px solid rgba(124,164,255,.48);background:rgba(47,111,255,.10);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 60px rgba(47,111,255,.12)}',
+        '.campaign-deadline{width:190px;height:190px;border-radius:50%;border:2px solid rgba(255,199,102,.65);background:radial-gradient(circle,rgba(255,184,74,.16),rgba(255,184,74,.04));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 0 9px rgba(255,184,74,.04),0 0 75px rgba(255,184,74,.20)}')
+      .replace('.campaign-deadline small{font-size:9px;letter-spacing:.18em;font-weight:950;color:#bcd0ff}.campaign-deadline strong{font-size:48px;line-height:1;margin:7px 0 4px;letter-spacing:-.05em}.campaign-deadline span{font-size:11px;font-weight:900;color:#dce6ff}',
+        '.campaign-deadline small{font-size:10px;letter-spacing:.18em;font-weight:950;color:#ffe2a7}.campaign-deadline strong{font-size:58px;line-height:1;margin:7px 0 4px;letter-spacing:-.06em;color:#ffc766;text-shadow:0 0 26px rgba(255,199,102,.20)}.campaign-deadline span{font-size:12px;font-weight:900;color:#fff0cf}')
+      .replace('.campaign-card{min-width:0;padding:22px 18px 24px;border:1px solid rgba(255,255,255,.11);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 20px 60px rgba(0,0,0,.16)}',
+        '.campaign-card{position:relative;overflow:hidden;min-width:0;padding:25px 20px 27px;border:1px solid rgba(255,199,102,.30);border-radius:18px;background:linear-gradient(145deg,rgba(255,184,74,.13),rgba(255,255,255,.022));box-shadow:0 20px 60px rgba(0,0,0,.20)}.campaign-card:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#d99418,#ffd98a,#d99418)}')
+      .replace('.campaign-no{font-size:10px;font-weight:900;letter-spacing:.12em;color:#cbd2dd;margin-bottom:18px}.campaign-no b{font-size:20px;color:#7ca4ff;margin-left:3px}',
+        '.campaign-no{font-size:10px;font-weight:900;letter-spacing:.12em;color:#ead2a2;margin-bottom:18px}.campaign-no b{font-size:22px;color:#ffc766;margin-left:3px}')
+      .replace('.campaign-cond{display:inline-flex;min-height:24px;align-items:center;padding:0 8px;border-radius:999px;background:#2f6fff;color:#fff;font-size:8px;font-weight:900;margin-bottom:17px;white-space:nowrap}',
+        '.campaign-cond{display:inline-flex;min-height:27px;align-items:center;padding:0 10px;border-radius:999px;background:linear-gradient(90deg,#d99418,#ffbd48);color:#171008;font-size:8px;font-weight:950;margin-bottom:17px;white-space:nowrap;box-shadow:0 7px 18px rgba(255,184,74,.18)}')
+      .replace('.campaign-card>strong{display:block;font-size:50px;line-height:1;color:#7ca4ff;letter-spacing:-.06em;margin:8px 0 12px;white-space:nowrap}',
+        '.campaign-card>strong{display:block;font-size:54px;line-height:1;color:#ffc766;letter-spacing:-.06em;margin:8px 0 12px;white-space:nowrap;text-shadow:0 0 22px rgba(255,199,102,.10)}')
+      .replace('.campaign-chip{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;padding:8px 12px 8px 9px;border:1px solid rgba(124,164,255,.36);border-radius:999px;background:rgba(47,111,255,.13);backdrop-filter:blur(8px);font-size:10px;font-weight:900}',
+        '.campaign-chip{display:inline-flex;align-items:center;gap:10px;margin:0 0 20px;padding:10px 14px 10px 10px;border:1px solid rgba(255,199,102,.62);border-radius:999px;background:linear-gradient(90deg,#d99418,#ffbd48);color:#171008;box-shadow:0 12px 34px rgba(255,184,74,.24);backdrop-filter:blur(8px);font-size:10px;font-weight:950}')
+      .replace('.campaign-chip b{background:#2f6fff;border-radius:999px;padding:5px 8px;font-size:9px}.campaign-chip span{color:#e7edff}.campaign-chip i{font-style:normal;color:#7ca4ff}',
+        '.campaign-chip b{background:#171008;color:#ffd98a;border-radius:999px;padding:6px 9px;font-size:9px}.campaign-chip span{color:#171008;font-size:11px}.campaign-chip i{font-style:normal;color:#171008;font-weight:1000}')
+      .replace('BASE GYM24 V10 Preview','BASE GYM24 V13 Campaign Strong Preview');
 
     document.open();
     document.write(html);
