@@ -1,0 +1,147 @@
+name: Build standalone V12 production HTML
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'v8-preview.html'
+      - 'v10-preview.html'
+      - 'v12-preview.html'
+      - 'index-v7-backup.html'
+      - '.github/workflows/build-production.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install parser
+        run: python -m pip install --quiet beautifulsoup4
+      - name: Build production.html from exact V12 sources
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          import copy, re
+
+          def text(path):
+              return Path(path).read_text(encoding='utf-8')
+
+          v8_text = text('v8-preview.html')
+          v7_text = text('index-v7-backup.html')
+          v10_text = text('v10-preview.html')
+          v12_text = text('v12-preview.html')
+
+          doc = BeautifulSoup(v8_text, 'html.parser')
+          old = BeautifulSoup(v7_text, 'html.parser')
+
+          # V10: preserve the previous personal-training section exactly.
+          current = doc.select_one('#personal')
+          previous = old.select_one('#personal')
+          if current is None or previous is None:
+              raise RuntimeError('Could not locate #personal in V8/V7')
+          current.replace_with(copy.copy(previous))
+
+          # V12: remove all earlier campaign/map variants before inserting the final ones.
+          for selector in ['#campaign', '.august-campaign', '.campaign-chip', '#campaign-billboard', '#floor-map']:
+              for node in doc.select(selector):
+                  node.decompose()
+
+          # V10 contains the CSS specifically used to render the preserved V7 personal section.
+          m10 = re.search(r"style\.textContent=`(.*?)`;\s*v8\.head\.appendChild\(style\)", v10_text, re.S)
+          if not m10:
+              raise RuntimeError('Could not extract V10 style')
+          v10_css = m10.group(1)
+          marker = '/* V7 PERSONAL TRAINING SECTION — intentionally preserved */'
+          if marker in v10_css:
+              v10_css = v10_css[v10_css.index(marker):]
+          style10 = doc.new_tag('style')
+          style10.string = v10_css
+          doc.head.append(style10)
+
+          # Extract final V12 CSS from the runtime template literal.
+          m12css = re.search(r"strongStyle\.textContent=\\?`(.*?)\\?`;", v12_text, re.S)
+          if not m12css:
+              raise RuntimeError('Could not extract V12 style')
+          v12_css = m12css.group(1)
+          style12 = doc.new_tag('style')
+          style12.string = v12_css
+          doc.head.append(style12)
+
+          # Extract the exact final campaign billboard HTML.
+          mb = re.search(r"billboard\.innerHTML=\\?`(.*?)\\?`;", v12_text, re.S)
+          if not mb:
+              raise RuntimeError('Could not extract campaign billboard HTML')
+          billboard_fragment = BeautifulSoup(mb.group(1), 'html.parser')
+          billboard = doc.new_tag('section')
+          billboard['class'] = ['campaign-billboard']
+          billboard['id'] = 'campaign-billboard'
+          for child in list(billboard_fragment.contents):
+              billboard.append(child)
+          hero = doc.select_one('.hero')
+          if hero is None:
+              raise RuntimeError('Could not locate hero')
+          hero.insert_after(billboard)
+
+          # Extract the exact final 100-tsubo floor-map HTML and place it after the campaign.
+          mf = re.search(r"floorMap\.innerHTML=\\?`(.*?)\\?`;", v12_text, re.S)
+          if not mf:
+              raise RuntimeError('Could not extract floor map HTML')
+          floor_fragment = BeautifulSoup(mf.group(1), 'html.parser')
+          floor = doc.new_tag('section')
+          floor['class'] = ['floor-map-section']
+          floor['id'] = 'floor-map'
+          for child in list(floor_fragment.contents):
+              floor.append(child)
+          billboard.insert_after(floor)
+
+          # Production-only cleanup: remove preview label and preview-only indexing metadata.
+          for node in doc.select('.previewbar'):
+              node.decompose()
+          robots = doc.find('meta', attrs={'name':'robots'})
+          if robots:
+              robots['content'] = 'index,follow,max-image-preview:large'
+          else:
+              robots = doc.new_tag('meta')
+              robots['name'] = 'robots'
+              robots['content'] = 'index,follow,max-image-preview:large'
+              doc.head.append(robots)
+
+          canonical = doc.find('link', attrs={'rel':'canonical'})
+          if canonical:
+              canonical['href'] = 'https://basegym24.jp/LP/production.html'
+          ogurl = doc.find('meta', attrs={'property':'og:url'})
+          if ogurl:
+              ogurl['content'] = 'https://basegym24.jp/LP/production.html'
+
+          doc.title.string = 'BASE GYM24｜本厚木の24時間ジム・パーソナルトレーニング'
+
+          out = '<!doctype html>\n' + str(doc.html)
+          Path('production.html').write_text(out, encoding='utf-8')
+
+          # Guardrails: this file must be static and must contain the approved final elements exactly once.
+          checks = {
+              'campaign-billboard': out.count('id="campaign-billboard"') == 1,
+              'floor-map': out.count('id="floor-map"') == 1,
+              'single-image-map': 'floor-map-img' in out and 'min-width:900px' not in v12_css,
+              'no preview loader': 'V12を読み込んでいます' not in out and "fetch('./v10-preview.html" not in out,
+              'personal': 'id="personal"' in out,
+              'gold campaign': '#ffc766' in v12_css,
+          }
+          failed = [k for k,v in checks.items() if not v]
+          print('checks:', checks)
+          if failed:
+              raise RuntimeError('Failed checks: ' + ', '.join(failed))
+          print('production.html bytes:', len(out.encode('utf-8')))
+          PY
+      - name: Upload production HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: basegym24-production-v12
+          path: production.html
+          if-no-files-found: error
+          retention-days: 7
