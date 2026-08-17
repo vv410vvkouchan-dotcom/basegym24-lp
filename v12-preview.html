@@ -12,76 +12,36 @@
 <script>
 (async()=>{
 try{
-  let html=await fetch('./v10-preview.html?rev=v12-campaign-single-20260817',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
-
-  html=html
-    .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
-    .replace('<small>初月月会費</small><strong>0<span>円</span></strong><p>今ならお得にスタート！</p>','<small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>')
-    .replace('<small>2ヶ月目月会費</small><strong>50<span>%OFF</span></strong><p>続けやすい料金で理想の自分へ。</p>','<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料。</p>')
-    .replace('<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料！</p>','<small>入会から5か月間の月会費</small><strong class="gift">2,200<span>円引き</span></strong><p>5か月間、お得な月会費で続けられます。</p>')
-    .replace('<small>プロテイン</small><strong class="gift">1杯<span>無料券</span></strong><p>プレゼント！</p>','<small>水素水・サプリメントサーバー</small><strong class="gift">2ヶ月<span>無料</span></strong><p>水分・栄養補給をサポート。</p>')
-    .replace('<small>水素水</small><strong class="gift">2ヶ月<span>無料</span></strong><p>プレゼント！</p>','<small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてプレゼント。</p>')
-    .replace('この夏、トレーニングを始める方を応援。体験当日のご入会で使える特典を含む、期間限定キャンペーンです。','この夏、トレーニングを始める方を応援。初月・翌月会費無料、入会金無料、さらに5か月間の月会費割引など、8月限定の入会キャンペーンです。')
-    .replaceAll('LIMITED BENEFIT','期間限定')
-    .replaceAll('PRESENT','入会特典')
-    .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。');
-
+  let html=await fetch('./v10-preview.html?rev=v12-campaign-red-20260817',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
   const runtime=`
-    /* KEEP ONLY ONE CAMPAIGN */
     v8.querySelectorAll('#campaign,.august-campaign,.campaign-chip,#campaign-billboard').forEach(el=>el.remove());
-
     const strongStyle=v8.createElement('style');
     strongStyle.textContent=\`
-    .campaign-billboard{position:relative;overflow:hidden;padding:56px 0 54px;background:radial-gradient(circle at 88% 8%,rgba(255,198,83,.40),transparent 25rem),radial-gradient(circle at 9% 92%,rgba(255,125,0,.20),transparent 28rem),linear-gradient(135deg,#2a1803 0%,#100904 48%,#1f1103 100%);border-top:2px solid rgba(255,211,128,.82);border-bottom:2px solid rgba(255,211,128,.62);box-shadow:0 24px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06)}
+    .campaign-billboard{position:relative;overflow:hidden;padding:60px 0 58px;background:radial-gradient(circle at 88% 8%,rgba(255,45,45,.24),transparent 25rem),radial-gradient(circle at 10% 90%,rgba(255,190,70,.20),transparent 28rem),linear-gradient(135deg,#260605 0%,#100604 48%,#211203 100%);border-top:3px solid #e62929;border-bottom:2px solid rgba(255,211,128,.72);box-shadow:0 24px 80px rgba(0,0,0,.38)}
     .campaign-billboard:before{content:'CAMPAIGN';position:absolute;right:-.03em;top:-.23em;font-size:min(20vw,290px);font-weight:1000;line-height:1;letter-spacing:-.08em;color:rgba(255,255,255,.045);pointer-events:none}
     .campaign-billboard .cb-grid{position:relative;z-index:1;display:grid;grid-template-columns:.76fr 1.24fr;gap:48px;align-items:center}
-    .campaign-billboard .cb-tag{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:#ffd06b;color:#171008;font-size:11px;font-weight:1000;letter-spacing:.1em;box-shadow:0 8px 22px rgba(255,184,74,.26)}
-    .campaign-billboard .cb-date{display:flex;align-items:flex-end;gap:13px;margin:16px 0 15px}.campaign-billboard .cb-date strong{font-size:clamp(64px,8vw,106px);line-height:.78;letter-spacing:-.07em;color:#ffc766;text-shadow:0 0 40px rgba(255,199,102,.22)}.campaign-billboard .cb-date span{font-size:13px;font-weight:950;color:#fff0cf;padding-bottom:6px}
-    .campaign-billboard h2{margin:0;font-size:clamp(48px,6.8vw,88px);line-height:.94;letter-spacing:-.06em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard .cb-lead{margin:17px 0 0;color:#dfcaa1;font-size:14px;line-height:1.85;max-width:650px}
-    .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:20px 13px 18px;border:1px solid rgba(255,211,128,.44);border-radius:14px;background:linear-gradient(145deg,rgba(255,190,76,.19),rgba(255,255,255,.035));box-shadow:0 16px 38px rgba(0,0,0,.20)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#d99418,#ffe6ad,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e7c47e;font-size:8px;font-weight:950;letter-spacing:.11em;margin-bottom:8px}.campaign-billboard .cb-benefit b{display:block;color:#fff7e7;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ffc766;font-size:23px;line-height:1.04;margin-top:5px;letter-spacing:-.045em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,220,151,.68);background:linear-gradient(145deg,rgba(255,190,76,.25),rgba(255,255,255,.04))}
-    .campaign-billboard .cb-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d99418,#ffc653)!important;color:#171008!important;box-shadow:0 12px 32px rgba(255,184,74,.30)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,220,151,.52)!important;background:rgba(255,188,75,.09)!important;color:#fff0cf!important}
+    .campaign-billboard .cb-alert{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:7px;background:#e52626;color:#fff;font-size:12px;font-weight:1000;letter-spacing:.08em;box-shadow:0 8px 28px rgba(229,38,38,.34)}
+    .campaign-billboard .cb-alert:before{content:'●';font-size:9px;color:#fff}
+    .campaign-billboard .cb-date{display:flex;align-items:flex-end;gap:13px;margin:18px 0 15px}.campaign-billboard .cb-date strong{font-size:clamp(68px,8.5vw,112px);line-height:.78;letter-spacing:-.07em;color:#ff3b30;text-shadow:0 0 36px rgba(255,45,45,.28)}.campaign-billboard .cb-date span{font-size:15px;font-weight:1000;color:#fff;padding-bottom:7px}.campaign-billboard .cb-date span em{display:block;color:#ff4a40;font-style:normal;font-size:12px;margin-bottom:4px}
+    .campaign-billboard h2{margin:0;font-size:clamp(48px,6.8vw,88px);line-height:.94;letter-spacing:-.06em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard h2 .red{color:#ff3b30;text-shadow:0 0 28px rgba(255,59,48,.20)}
+    .campaign-billboard .cb-lead{margin:18px 0 0;color:#ead8b4;font-size:14px;line-height:1.85;max-width:650px}.campaign-billboard .cb-lead strong{color:#ff5148;font-size:16px}
+    .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:20px 13px 18px;border:1px solid rgba(255,211,128,.44);border-radius:14px;background:linear-gradient(145deg,rgba(255,190,76,.15),rgba(255,255,255,.035));box-shadow:0 16px 38px rgba(0,0,0,.20)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#d99418,#ffe6ad,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e7c47e;font-size:8px;font-weight:950;letter-spacing:.11em;margin-bottom:8px}.campaign-billboard .cb-benefit b{display:block;color:#fff7e7;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ff4a40;font-size:24px;line-height:1.04;margin-top:5px;letter-spacing:-.045em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,72,63,.65);background:linear-gradient(145deg,rgba(229,38,38,.14),rgba(255,190,76,.08))}.campaign-billboard .cb-benefit:nth-child(-n+3):before{background:linear-gradient(90deg,#c91818,#ff4a40,#c91818)}
+    .campaign-billboard .cb-note{grid-column:1/-1;margin-top:5px;text-align:right;color:#ff655d;font-size:11px;font-weight:900;letter-spacing:.04em}
+    .campaign-billboard .cb-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d91f1f,#ff493f)!important;color:#fff!important;box-shadow:0 12px 32px rgba(229,38,38,.30)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,220,151,.52)!important;background:rgba(255,188,75,.09)!important;color:#fff0cf!important}
     @media(max-width:980px){.campaign-billboard .cb-grid{grid-template-columns:1fr;gap:28px}.campaign-billboard .cb-benefits{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:680px){.campaign-billboard{padding:38px 0 40px}.campaign-billboard .cb-date strong{font-size:64px}.campaign-billboard .cb-date span{font-size:10px}.campaign-billboard h2{font-size:clamp(40px,13vw,56px)}.campaign-billboard .cb-lead{font-size:12px;line-height:1.75}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:8px}.campaign-billboard .cb-benefit{padding:15px 12px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:19px}.campaign-billboard .cb-benefit:last-child{grid-column:1/-1}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
+    @media(max-width:680px){.campaign-billboard{padding:40px 0 42px}.campaign-billboard .cb-alert{font-size:10px}.campaign-billboard .cb-date strong{font-size:68px}.campaign-billboard .cb-date span{font-size:11px}.campaign-billboard h2{font-size:clamp(40px,13vw,56px)}.campaign-billboard .cb-lead{font-size:12px;line-height:1.75}.campaign-billboard .cb-lead strong{font-size:13px}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:8px}.campaign-billboard .cb-benefit{padding:15px 12px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:20px}.campaign-billboard .cb-benefit:last-of-type{grid-column:1/-1}.campaign-billboard .cb-note{text-align:left;font-size:10px}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
     \`;
     v8.head.appendChild(strongStyle);
-
     const billboard=v8.createElement('section');
-    billboard.className='campaign-billboard';
-    billboard.id='campaign-billboard';
-    billboard.innerHTML=\`
-      <div class="wrap"><div class="cb-grid">
-        <div>
-          <span class="cb-tag">8月限定キャンペーン</span>
-          <div class="cb-date"><strong>8.31</strong><span>月曜まで</span></div>
-          <h2>今だけの<br><em>5大入会特典。</em></h2>
-          <p class="cb-lead">初月・翌月会費0円、入会金0円。さらに5か月間の月会費割引など、期間限定の入会キャンペーンです。</p>
-          <div class="cb-actions"><a class="btn cb-primary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/home" target="_blank" rel="noopener">WEB入会へ</a></div>
-        </div>
-        <div class="cb-benefits">
-          <div class="cb-benefit"><small>BENEFIT 01</small><b>初月・翌月会費</b><strong>0円</strong></div>
-          <div class="cb-benefit"><small>BENEFIT 02</small><b>入会金</b><strong>0円</strong></div>
-          <div class="cb-benefit"><small>BENEFIT 03</small><b>5か月間 月会費</b><strong>2,200円引き</strong></div>
-          <div class="cb-benefit"><small>BENEFIT 04</small><b>水素水・サプリ</b><strong>2ヶ月無料</strong></div>
-          <div class="cb-benefit"><small>BENEFIT 05</small><b>オリジナル</b><strong>シェイカー</strong></div>
-        </div>
-      </div></div>\`;
-    const heroSection=v8.querySelector('.hero');
-    if(heroSection&&heroSection.parentNode){heroSection.parentNode.insertBefore(billboard,heroSection.nextSibling)}
-    else{v8.body.insertBefore(billboard,v8.body.firstChild)}
+    billboard.className='campaign-billboard';billboard.id='campaign-billboard';
+    billboard.innerHTML=\`<div class="wrap"><div class="cb-grid"><div><span class="cb-alert">8月限定・期間限定キャンペーン</span><div class="cb-date"><strong>8.31</strong><span><em>終了まであとわずか</em>月曜まで</span></div><h2><span class="red">今だけ。</span><br><em>5大入会特典</em></h2><p class="cb-lead"><strong>初月・翌月会費0円 ＋ 入会金0円</strong><br>さらに5か月間の月会費割引など、8月だけの特別キャンペーンです。</p><div class="cb-actions"><a class="btn cb-primary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">今すぐ無料見学を予約 →</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/home" target="_blank" rel="noopener">WEB入会へ</a></div></div><div class="cb-benefits"><div class="cb-benefit"><small>BENEFIT 01</small><b>初月・翌月会費</b><strong>0円</strong></div><div class="cb-benefit"><small>BENEFIT 02</small><b>入会金</b><strong>0円</strong></div><div class="cb-benefit"><small>BENEFIT 03</small><b>5か月間 月会費</b><strong>2,200円引き</strong></div><div class="cb-benefit"><small>BENEFIT 04</small><b>水素水・サプリ</b><strong>2ヶ月無料</strong></div><div class="cb-benefit"><small>BENEFIT 05</small><b>オリジナル</b><strong>シェイカー</strong></div><div class="cb-note">※ 8/31までの期間限定</div></div></div></div>\`;
+    const heroSection=v8.querySelector('.hero');if(heroSection&&heroSection.parentNode){heroSection.parentNode.insertBefore(billboard,heroSection.nextSibling)}else{v8.body.insertBefore(billboard,v8.body.firstChild)}
   `;
-
   const hook='    v8.head.appendChild(style);';
   if(!html.includes(hook))throw new Error('campaign hook not found');
   html=html.replace(hook,hook+'\n'+runtime);
-  html=html.replace("v8.title='BASE GYM24｜V10 August Campaign Preview';","v8.title='BASE GYM24｜V12 Campaign Single';");
-
-  document.open();
-  document.write(html);
-  document.close();
-}catch(e){
-  document.getElementById('loading').innerHTML='<div class="error"><strong>読み込みに失敗しました</strong><span>'+String(e)+'</span></div>';
-  console.error(e);
-}
+  document.open();document.write(html);document.close();
+}catch(e){document.getElementById('loading').innerHTML='<div class="error"><strong>読み込みに失敗しました</strong><span>'+String(e)+'</span></div>';console.error(e)}
 })();
 </script>
 </body>
