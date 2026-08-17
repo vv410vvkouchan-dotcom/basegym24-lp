@@ -8,57 +8,79 @@
 <style>html,body{margin:0;background:#06080b;color:#fff;font-family:system-ui,sans-serif}.loading{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.loading strong{display:block;font-size:22px;margin-bottom:8px}.loading span{color:#aeb7c5;font-size:13px}.error{color:#ffb4b4}</style>
 </head>
 <body>
-<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>プレビューを読み込んでいます…</span></div></div>
+<div class="loading" id="loading"><div><strong>BASE GYM24</strong><span>V12を読み込んでいます…</span></div></div>
 <script>
 (async()=>{
-  try{
-    let html=await fetch('./v10-preview.html?rev=15',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
+try{
+  let html=await fetch('./v10-preview.html?rev=v12-campaign-strong-3',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('V10');return r.text()});
 
-    html=html
-      .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
-      .replace('<small>初月月会費</small><strong>0<span>円</span></strong><p>今ならお得にスタート！</p>', '<small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>')
-      .replace('<small>2ヶ月目月会費</small><strong>50<span>%OFF</span></strong><p>続けやすい料金で理想の自分へ。</p>', '<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料。</p>')
-      .replace('<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料！</p>', '<small>入会から5か月間の月会費</small><strong class="gift">2,200<span>円引き</span></strong><p>5か月間、お得な月会費で続けられます。</p>')
-      .replace('<small>プロテイン</small><strong class="gift">1杯<span>無料券</span></strong><p>プレゼント！</p>', '<small>水素水・サプリメントサーバー</small><strong class="gift">2ヶ月<span>無料</span></strong><p>水分・栄養補給をサポート。</p>')
-      .replace('<small>水素水</small><strong class="gift">2ヶ月<span>無料</span></strong><p>プレゼント！</p>', '<small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてプレゼント。</p>')
-      .replace('この夏、トレーニングを始める方を応援。体験当日のご入会で使える特典を含む、期間限定キャンペーンです。','この夏、トレーニングを始める方を応援。初月・翌月会費無料、入会金無料、さらに5か月間の月会費割引など、8月限定の入会キャンペーンです。')
-      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>初月・翌月の月会費</small>','<div class="campaign-cond">期間限定</div><small>初月・翌月の月会費</small>')
-      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>入会金</small>','<div class="campaign-cond ghost">期間限定</div><small>入会金</small>')
-      .replace('<div class="campaign-cond ghost">LIMITED BENEFIT</div><small>入会から5か月間の月会費</small>','<div class="campaign-cond">入会から5か月間</div><small>月会費</small>')
-      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>水素水・サプリメントサーバー</small>','<div class="campaign-cond">2か月無料</div><small>水素水・サプリメントサーバー</small>')
-      .replace('<div class="campaign-cond">体験当日のご入会で</div><small>オリジナル</small>','<div class="campaign-cond">入会特典</div><small>オリジナル</small>')
-      .replace('LIMITED BENEFIT','期間限定')
-      .replace('PRESENT','入会特典')
-      .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。')
-      .replace('BASE GYM24 V10 Preview','BASE GYM24 V12 Preview');
+  html=html
+    .replace('SUMMER MEMBERSHIP CAMPAIGN','8月入会キャンペーン')
+    .replace('<small>初月月会費</small><strong>0<span>円</span></strong><p>今ならお得にスタート！</p>','<small>初月・翌月の月会費</small><strong>0<span>円</span></strong><p>最初の2か月分の月会費が無料。</p>')
+    .replace('<small>2ヶ月目月会費</small><strong>50<span>%OFF</span></strong><p>続けやすい料金で理想の自分へ。</p>','<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料。</p>')
+    .replace('<small>入会金</small><strong>0<span>円</span></strong><p>今なら入会金が無料！</p>','<small>入会から5か月間の月会費</small><strong class="gift">2,200<span>円引き</span></strong><p>5か月間、お得な月会費で続けられます。</p>')
+    .replace('<small>プロテイン</small><strong class="gift">1杯<span>無料券</span></strong><p>プレゼント！</p>','<small>水素水・サプリメントサーバー</small><strong class="gift">2ヶ月<span>無料</span></strong><p>水分・栄養補給をサポート。</p>')
+    .replace('<small>水素水</small><strong class="gift">2ヶ月<span>無料</span></strong><p>プレゼント！</p>','<small>オリジナル</small><strong class="gift">シェイカー<span>プレゼント</span></strong><p>入会特典としてプレゼント。</p>')
+    .replace('この夏、トレーニングを始める方を応援。体験当日のご入会で使える特典を含む、期間限定キャンペーンです。','この夏、トレーニングを始める方を応援。初月・翌月会費無料、入会金無料、さらに5か月間の月会費割引など、8月限定の入会キャンペーンです。')
+    .replaceAll('LIMITED BENEFIT','期間限定')
+    .replaceAll('PRESENT','入会特典')
+    .replace('継続条件・違約金は契約画面でご確認ください。','入会月を除き6ヶ月の継続条件があります。');
 
-    const campaignCss=`
-<style>
-/* V12 CAMPAIGN RE-DESIGN */
-.august-campaign{position:relative!important;overflow:hidden!important;background:radial-gradient(circle at 88% 8%,rgba(255,190,73,.28),transparent 25rem),radial-gradient(circle at 10% 92%,rgba(255,128,0,.12),transparent 28rem),linear-gradient(180deg,#1b1207 0%,#0c0905 100%)!important;border-top:1px solid rgba(255,199,102,.32)!important;border-bottom:1px solid rgba(255,199,102,.32)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)!important}
-.august-campaign:before{content:"CAMPAIGN"!important;position:absolute!important;right:-.03em!important;top:-.22em!important;font-size:min(18vw,250px)!important;font-weight:1000!important;line-height:1!important;letter-spacing:-.08em!important;color:rgba(255,255,255,.025)!important;pointer-events:none!important}
-.campaign-top{position:relative!important;z-index:1!important;display:grid!important;grid-template-columns:1fr auto!important;gap:46px!important;align-items:center!important;margin-bottom:34px!important}
-.campaign-eyebrow{display:inline-flex!important;align-items:center!important;min-height:32px!important;padding:0 13px!important;border-radius:999px!important;background:rgba(255,184,74,.11)!important;border:1px solid rgba(255,199,102,.36)!important;color:#ffd887!important;font-size:10px!important;font-weight:950!important;letter-spacing:.14em!important;margin-bottom:14px!important}
-.campaign-top h2{font-size:clamp(44px,6.4vw,84px)!important;line-height:.98!important;letter-spacing:-.05em!important;margin:0 0 16px!important}.campaign-top h2 span{color:#ffc766!important;text-shadow:0 0 28px rgba(255,199,102,.16)!important}.campaign-top p{max-width:720px!important;color:#d3c19b!important;font-size:14px!important;line-height:1.9!important;margin:0!important}
-.campaign-deadline{width:188px!important;height:188px!important;border-radius:50%!important;border:2px solid rgba(255,199,102,.62)!important;background:radial-gradient(circle at 35% 30%,rgba(255,199,102,.18),rgba(255,184,74,.06))!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;box-shadow:0 0 0 9px rgba(255,184,74,.035),0 0 72px rgba(255,184,74,.18)!important}.campaign-deadline small{font-size:9px!important;letter-spacing:.18em!important;font-weight:950!important;color:#ffe0a3!important}.campaign-deadline strong{font-size:54px!important;line-height:1!important;margin:8px 0 4px!important;letter-spacing:-.055em!important;color:#ffc766!important}.campaign-deadline span{font-size:11px!important;font-weight:900!important;color:#fff0cf!important}
-.campaign-grid{position:relative!important;z-index:1!important;display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:12px!important}
-.campaign-card{position:relative!important;overflow:hidden!important;min-width:0!important;padding:24px 18px 25px!important;border:1px solid rgba(255,199,102,.28)!important;border-radius:18px!important;background:linear-gradient(145deg,rgba(255,184,74,.10),rgba(255,255,255,.025))!important;box-shadow:0 20px 55px rgba(0,0,0,.18)!important}.campaign-card:before{content:""!important;position:absolute!important;left:0!important;right:0!important;top:0!important;height:3px!important;background:linear-gradient(90deg,#d99418,#ffd98a,#d99418)!important}.campaign-card:nth-child(1),.campaign-card:nth-child(2),.campaign-card:nth-child(3){border-color:rgba(255,199,102,.46)!important;background:linear-gradient(145deg,rgba(255,184,74,.15),rgba(255,255,255,.028))!important}
-.campaign-no{font-size:10px!important;font-weight:900!important;letter-spacing:.12em!important;color:#f2dfb9!important;margin-bottom:16px!important}.campaign-no b{font-size:21px!important;color:#ffc766!important;margin-left:3px!important}.campaign-cond,.campaign-cond.ghost{display:inline-flex!important;align-items:center!important;min-height:26px!important;padding:0 9px!important;border-radius:999px!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;border:0!important;color:#171008!important;font-size:8px!important;font-weight:950!important;margin-bottom:16px!important;white-space:nowrap!important;box-shadow:0 7px 18px rgba(255,184,74,.18)!important}.campaign-card>small{display:block!important;color:#f5e9d2!important;font-size:11px!important;font-weight:900!important}.campaign-card>strong{display:block!important;font-size:50px!important;line-height:1!important;color:#ffc766!important;letter-spacing:-.06em!important;margin:8px 0 12px!important;white-space:nowrap!important;text-shadow:0 0 20px rgba(255,199,102,.10)!important}.campaign-card>strong span{font-size:16px!important;color:#ffe4ad!important}.campaign-card>strong.gift{font-size:37px!important}.campaign-card>strong.gift span{display:block!important;font-size:18px!important;margin-top:6px!important}.campaign-card>p{margin:0!important;color:#bca984!important;font-size:10.5px!important;line-height:1.65!important}
-.campaign-bottom{position:relative!important;z-index:1!important;margin-top:26px!important;padding-top:22px!important;border-top:1px solid rgba(255,199,102,.18)!important;display:flex!important;justify-content:space-between!important;align-items:center!important;gap:24px!important}.campaign-bottom>p{margin:0!important;max-width:650px!important;color:#96876c!important;font-size:10px!important;line-height:1.7!important}.campaign-actions{display:flex!important;gap:9px!important;flex-shrink:0!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 10px 28px rgba(255,184,74,.22)!important}.campaign-actions .btn-white{background:#fff3d6!important;color:#171008!important}
-.campaign-chip{display:inline-flex!important;align-items:center!important;gap:10px!important;margin:0 0 20px!important;padding:9px 13px 9px 9px!important;border:1px solid rgba(255,199,102,.62)!important;border-radius:999px!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 12px 32px rgba(255,184,74,.22)!important}.campaign-chip b{background:#171008!important;color:#ffd980!important;border-radius:999px!important;padding:6px 9px!important;font-size:9px!important}.campaign-chip span{color:#171008!important;font-weight:950!important}.campaign-chip i{color:#171008!important;font-style:normal!important;font-weight:1000!important}
-@media(max-width:1050px){.campaign-grid{grid-template-columns:repeat(3,1fr)!important}}
-@media(max-width:760px){.campaign-top{grid-template-columns:1fr!important;gap:22px!important}.campaign-deadline{width:auto!important;height:auto!important;border-radius:16px!important;display:grid!important;grid-template-columns:auto auto auto!important;gap:8px!important;justify-content:start!important;padding:16px 18px!important}.campaign-deadline strong{font-size:34px!important;margin:0!important}.campaign-grid{grid-template-columns:1fr 1fr!important}.campaign-card:last-child{grid-column:1/-1!important}.campaign-bottom{display:block!important}.campaign-actions{margin-top:18px!important}.campaign-actions .btn{flex:1!important}}
-@media(max-width:480px){.campaign-grid{grid-template-columns:1fr!important;gap:14px!important}.campaign-card:last-child{grid-column:auto!important}.campaign-card{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:'no no' 'cond cond' 'label value' 'desc value'!important;column-gap:14px!important;row-gap:10px!important;align-items:center!important;padding:20px 18px 21px!important}.campaign-no{grid-area:no!important;margin:0!important}.campaign-cond{grid-area:cond!important;width:100%!important;justify-content:center!important;margin:0!important}.campaign-card>small{grid-area:label!important}.campaign-card>strong{grid-area:value!important;font-size:46px!important;margin:0!important;text-align:right!important}.campaign-card>strong.gift{font-size:34px!important}.campaign-card>p{grid-area:desc!important}.campaign-actions{display:grid!important;grid-template-columns:1fr!important}.campaign-top h2{font-size:clamp(38px,12vw,52px)!important}}
-</style>`;
-    html=html.replace('</head>',campaignCss+'\n</head>');
+  const runtime=`
+    /* V12 STRONG CAMPAIGN BILLBOARD */
+    const strongStyle=v8.createElement('style');
+    strongStyle.textContent=\`
+    .campaign-billboard{position:relative;overflow:hidden;padding:46px 0 42px;background:radial-gradient(circle at 88% 5%,rgba(255,196,84,.38),transparent 25rem),radial-gradient(circle at 8% 92%,rgba(255,126,0,.18),transparent 28rem),linear-gradient(135deg,#271704 0%,#0e0904 48%,#1c1004 100%);border-top:2px solid rgba(255,207,112,.72);border-bottom:2px solid rgba(255,207,112,.52);box-shadow:0 20px 70px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05)}
+    .campaign-billboard:before{content:'CAMPAIGN';position:absolute;right:-.03em;top:-.20em;font-size:min(19vw,270px);font-weight:1000;line-height:1;letter-spacing:-.08em;color:rgba(255,255,255,.035);pointer-events:none}
+    .campaign-billboard .cb-grid{position:relative;z-index:1;display:grid;grid-template-columns:.78fr 1.22fr;gap:44px;align-items:center}
+    .campaign-billboard .cb-tag{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#ffca62;color:#171008;font-size:10px;font-weight:1000;letter-spacing:.1em;box-shadow:0 7px 20px rgba(255,184,74,.22)}
+    .campaign-billboard .cb-date{display:flex;align-items:flex-end;gap:12px;margin:14px 0 13px}.campaign-billboard .cb-date strong{font-size:clamp(58px,7vw,92px);line-height:.8;letter-spacing:-.065em;color:#ffc766;text-shadow:0 0 34px rgba(255,199,102,.18)}.campaign-billboard .cb-date span{font-size:12px;font-weight:900;color:#ffe9bd;padding-bottom:5px}
+    .campaign-billboard h2{margin:0;font-size:clamp(43px,6vw,78px);line-height:.96;letter-spacing:-.055em;font-weight:1000}.campaign-billboard h2 em{font-style:normal;color:#ffc766}.campaign-billboard .cb-lead{margin:15px 0 0;color:#d8c59f;font-size:13px;line-height:1.8;max-width:620px}
+    .campaign-billboard .cb-benefits{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.campaign-billboard .cb-benefit{position:relative;overflow:hidden;min-width:0;padding:17px 12px 16px;border:1px solid rgba(255,207,112,.38);border-radius:13px;background:linear-gradient(145deg,rgba(255,190,76,.17),rgba(255,255,255,.03));box-shadow:0 14px 32px rgba(0,0,0,.18)}.campaign-billboard .cb-benefit:before{content:'';position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#d99418,#ffe3a6,#d99418)}.campaign-billboard .cb-benefit small{display:block;color:#e2bc72;font-size:8px;font-weight:950;letter-spacing:.1em;margin-bottom:7px}.campaign-billboard .cb-benefit b{display:block;color:#fff5df;font-size:13px;line-height:1.35}.campaign-billboard .cb-benefit strong{display:block;color:#ffc766;font-size:22px;line-height:1.05;margin-top:4px;letter-spacing:-.04em}.campaign-billboard .cb-benefit:nth-child(-n+3){border-color:rgba(255,215,137,.58);background:linear-gradient(145deg,rgba(255,190,76,.22),rgba(255,255,255,.035))}
+    .campaign-billboard .cb-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}.campaign-billboard .cb-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;box-shadow:0 11px 28px rgba(255,184,74,.26)!important}.campaign-billboard .cb-secondary{border:1px solid rgba(255,215,137,.45)!important;background:rgba(255,188,75,.08)!important;color:#ffe9bd!important}
+    .august-campaign{background:linear-gradient(180deg,#120c05 0%,#080706 100%)!important;border-bottom:1px solid rgba(255,199,102,.24)!important}.campaign-eyebrow,.campaign-top h2 span,.campaign-no b,.campaign-card>strong{color:#ffc766!important}.campaign-deadline{border-color:rgba(255,199,102,.58)!important;background:rgba(255,184,74,.10)!important;box-shadow:0 0 60px rgba(255,184,74,.16)!important}.campaign-deadline small{color:#ffe0a3!important}.campaign-cond,.campaign-cond.ghost{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important;border:0!important}.campaign-card{border-color:rgba(255,199,102,.26)!important;background:linear-gradient(145deg,rgba(255,184,74,.08),rgba(255,255,255,.02))!important}.campaign-actions .btn-primary{background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip{border-color:rgba(255,199,102,.62)!important;background:linear-gradient(90deg,#d99418,#ffbd48)!important;color:#171008!important}.campaign-chip b{background:#171008!important;color:#ffd980!important}.campaign-chip span,.campaign-chip i{color:#171008!important}
+    @media(max-width:980px){.campaign-billboard .cb-grid{grid-template-columns:1fr;gap:24px}.campaign-billboard .cb-benefits{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:680px){.campaign-billboard{padding:34px 0 36px}.campaign-billboard .cb-date strong{font-size:58px}.campaign-billboard .cb-date span{font-size:10px}.campaign-billboard h2{font-size:clamp(37px,12vw,52px)}.campaign-billboard .cb-benefits{grid-template-columns:1fr 1fr;gap:7px}.campaign-billboard .cb-benefit{padding:14px 11px}.campaign-billboard .cb-benefit b{font-size:11px}.campaign-billboard .cb-benefit strong{font-size:18px}.campaign-billboard .cb-benefit:last-child{grid-column:1/-1}.campaign-billboard .cb-actions{display:grid;grid-template-columns:1fr}.campaign-billboard .cb-actions .btn{width:100%}}
+    \`;
+    v8.head.appendChild(strongStyle);
 
-    document.open();
-    document.write(html);
-    document.close();
-  }catch(e){
-    document.getElementById('loading').innerHTML='<div class="error"><strong>読み込みに失敗しました</strong><span>ページを再読み込みしてください。</span></div>';
-    console.error(e);
-  }
+    const billboard=v8.createElement('section');
+    billboard.className='campaign-billboard';
+    billboard.id='campaign-billboard';
+    billboard.innerHTML=\`
+      <div class="wrap"><div class="cb-grid">
+        <div>
+          <span class="cb-tag">8月限定キャンペーン</span>
+          <div class="cb-date"><strong>8.31</strong><span>月曜まで</span></div>
+          <h2>今だけの<br><em>5大入会特典。</em></h2>
+          <p class="cb-lead">初月・翌月会費0円、入会金0円。さらに5か月間の月会費割引など、期間限定の入会キャンペーンです。</p>
+          <div class="cb-actions"><a class="btn cb-primary" href="#campaign">特典を詳しく見る ↓</a><a class="btn cb-secondary" href="https://himitsu-kichi.hacomono.jp/widgets/1?isFilterableByCategory=false&isShowStudioInfo=true&studioIds=1" target="_blank" rel="noopener">無料見学を予約 →</a></div>
+        </div>
+        <div class="cb-benefits">
+          <div class="cb-benefit"><small>BENEFIT 01</small><b>初月・翌月会費</b><strong>0円</strong></div>
+          <div class="cb-benefit"><small>BENEFIT 02</small><b>入会金</b><strong>0円</strong></div>
+          <div class="cb-benefit"><small>BENEFIT 03</small><b>5か月間 月会費</b><strong>2,200円引き</strong></div>
+          <div class="cb-benefit"><small>BENEFIT 04</small><b>水素水・サプリ</b><strong>2ヶ月無料</strong></div>
+          <div class="cb-benefit"><small>BENEFIT 05</small><b>オリジナル</b><strong>シェイカー</strong></div>
+        </div>
+      </div></div>\`;
+    const factsBar=v8.querySelector('.facts')?.closest('.factbar,section,div');
+    const heroSection=v8.querySelector('.hero');
+    if(factsBar&&factsBar.parentNode){factsBar.parentNode.insertBefore(billboard,factsBar.nextSibling)}
+    else if(heroSection&&heroSection.parentNode){heroSection.parentNode.insertBefore(billboard,heroSection.nextSibling)}
+    else{v8.body.insertBefore(billboard,v8.body.firstChild)}
+  `;
+
+  html=html.replace('    v8.head.appendChild(style);','    v8.head.appendChild(style);\n'+runtime);
+  html=html.replace("v8.title='BASE GYM24｜V10 August Campaign Preview';","v8.title='BASE GYM24｜V12 Campaign Strong';");
+
+  document.open();
+  document.write(html);
+  document.close();
+}catch(e){
+  document.getElementById('loading').innerHTML='<div class="error"><strong>読み込みに失敗しました</strong><span>'+String(e)+'</span></div>';
+  console.error(e);
+}
 })();
 </script>
 </body>
